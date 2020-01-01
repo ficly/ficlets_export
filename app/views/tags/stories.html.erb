@@ -2,7 +2,7 @@
   Stories Tagged With: "<%= @tag.tag %>" <% if @page > 1 %>- Page <%= @page %> of <%= @total_pages %> <% end %>
 <% end %>
 
-<h1>Stories Tagged With: "<%= @tag.tag %>"</h1>
+<h1>Stories Tagged With: "<%= @tag.tag %>" (<%= @tag.story_count %>)</h1>
 
 <ol class="object-list stories-list">
 <% @stories.each do |story| %>

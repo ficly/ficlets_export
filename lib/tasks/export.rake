@@ -45,7 +45,7 @@ namespace :export do
   task :stories => :environment do
     api.get("/")
     api.get("/stories")
-    total_pages = Story.published.includes(:user).paginate(page: @page, per_page: 100).total_pages
+    total_pages = Story.paginate(page: @page, per_page: 100).total_pages
 
     i = 1
 
@@ -55,8 +55,8 @@ namespace :export do
     end
 
     Story.published.find_each do |s|
-      api.get("/stories/#{s.id}")
-      api.get("/stories/#{s.id}/comments")
+      api.get("/stories/#{s.orig_id}")
+      api.get("/stories/#{s.orig_id}/comments")
     end
   end
   #
@@ -86,7 +86,7 @@ namespace :export do
   task :authors => :environment do
     api.get("/authors")
 
-    total_pages = User.active.where.not(name: ["", nil], user_is_deleted: true).order("name asc").paginate(page: @page, per_page: 100).total_pages
+    total_pages = Author.where.not(name: ["", nil]).order("name asc").paginate(page: @page, per_page: 100).total_pages
 
     i = 1
 
@@ -95,7 +95,7 @@ namespace :export do
       i += 1
     end
 
-    User.active.where.not(name: ["", nil], user_is_deleted: true).find_each do |user|
+    Author.active.where.not(name: ["", nil]).find_each do |user|
       api.get("/authors/#{user.uri_name}")
     end
   end
@@ -103,7 +103,7 @@ namespace :export do
   task :tags => :environment do
     api.get("/tags")
 
-    total_pages = Tag.where.not(cleaned_tag: [nil, "", '-', 'page']).where("stories_count > 0").paginate(page: @page, per_page: 250).total_pages
+    total_pages = Tag.where("story_count > 0").paginate(page: @page, per_page: 250).total_pages
 
     i = 1
 
@@ -112,16 +112,16 @@ namespace :export do
       i += 1
     end
 
-    Tag.where.not(cleaned_tag: [nil, "", '-', 'page']).where("stories_count > 0").find_each do |tag|
-      api.get("/tags/#{tag.cleaned_tag}/stories")
+    Tag.where.not(cleaned_tag: [nil, "", '-', 'page']).where("story_count > 0").find_each do |tag|
+      api.get("/tags/#{tag.tag}/stories")
 
-      story_ids = tag.taggings.where(taggable_type: "Story").distinct.pluck(:taggable_id)
-      total_pages = Story.published.where(id: story_ids).paginate(page: 1, per_page: 50).total_pages
+      story_ids = tag.story_ids
+      total_pages = Story.where(orig_id: story_ids).paginate(page: 1, per_page: 50).total_pages
       i = 1
 
       if total_pages > 1
         while i <= total_pages
-          api.get("/tags/#{tag.cleaned_tag}/stories/#{i}")
+          api.get("/tags/#{tag.tag}/stories/#{i}")
           i += 1
         end
       end
