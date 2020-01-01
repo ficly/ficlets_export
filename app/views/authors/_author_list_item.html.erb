@@ -1,0 +1,6 @@
+<li class="author">
+  <div class="item-meta">
+    <h3><%= link_to author.name.html_safe, author_path(author.uri_name) %></h3>
+    <p>They published <%= pluralize(author.stories.published.count, "stories") %></p>
+  </div>
+</li>

@@ -1,0 +1,30 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+body#ficlets {
+  aside.author-meta {
+    max-width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0 10px;
+    margin: 10px 0 10px;
+    border-bottom: 1px dotted #b8b8b8;
+    font-size: 15px;
+
+    .icon-container {
+      flex: 0 0 80px;
+    }
+    .author-mini-bio {
+      flex: 1 1 auto;
+      p {
+        margin: 0 0 5px;
+        padding: 0;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

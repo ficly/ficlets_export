@@ -1,0 +1,58 @@
+<% content_for :title do %>
+  <%= @story.title %>
+  <% if @story.user %>
+    by <%= @story.user.name %>
+  <% end %>
+<% end %>
+
+<article class="story">
+  <h1><%= @story.title %></h1>
+  <% if @story.user %>
+    <%= render partial: "authors/author_meta", locals: { author: @story.user } %>
+  <% end %>
+  <aside class="story-meta">
+    <p class="published">Published on <abbr class="date" title="<%= @story.published_at.to_s %>"><%= @story.display_published_at %></abbr></p>
+
+  </aside>
+  <div class="story-body">
+    <%= @story.to_html.html_safe %>
+  </div>
+</article>
+
+<section class="prequels-and-sequels">
+  <nav class="prequels">
+    <h3>Prequels</h3>
+    <% if @prequels.empty? %>
+      <p><strong>Oh no!</strong> This story doesn't have any prequels.</p>
+    <% else %>
+      <ul class="object-list stories-list">
+      <% @prequels.each do |story| %>
+        <%= render partial: "story_list_item", locals: { story: story } %>
+      <% end %>
+      </ul>
+    <% end %>
+  </nav>
+
+  <nav class="sequels">
+    <h3>Sequels</h3>
+    <% if @sequels.empty? %>
+      <p><strong>Oh no!</strong> This story doesn't have any prequels.</p>
+    <% else %>
+      <ul class="object-list stories-list">
+      <% @sequels.each do |story| %>
+        <%= render partial: "story_list_item", locals: { story: story } %>
+      <% end %>
+      </ul>
+    <% end %>
+  </nav>
+</section>
+
+<section class="comments" data-comments-count="<%= @story.comments.count %>">
+  <% if @story.comments.any? %>
+    <%= link_to comments_story_path(@story.orig_id) do %>
+      View this story's <%= pluralize(@story.comments.count, "comments") %>.
+    <% end %>
+  <% else %>
+    This story has no comments.
+  <% end %>
+</section>

@@ -1,0 +1,16 @@
+<% content_for :title do %>
+Comments on <%= @story.title %>
+  <% if @story.user %>by <%= @story.user.name %><% end %>
+<% end %>
+
+<h1>Comments on <%= link_to @story.title, story_path(@story.orig_id) %>
+<% if @story.author %>by <%= link_to @story.author.name, author_path(@story.author.uri_name) %><% end %></h1>
+
+<div id="comments">
+  <ul>
+  <% @comments.each do |comment| %>
+    <% next if comment.body.strip.blank? || comment.author.nil? %>
+    <%= render partial: "shared/comment", locals: { comment: comment, story: @story } %>
+  <% end %>
+  </ul>
+</div>

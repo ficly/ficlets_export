@@ -1,0 +1,22 @@
+<% content_for :title do %>
+  <%= @author.name.html_safe %>
+<% end %>
+
+<h1><%= @author.name.html_safe %></h1>
+
+<div class="author-meta">
+  <div class="bio"><%= @author.bio.html_safe %></div>
+</div>
+
+<section id="stories">
+  <h2>Stories (<%= @stories.count %>)</h2>
+<% if @stories.empty? %>
+  <p><%= @author.name %> didn't publish any stories.</p>
+<% else %>
+  <ul class="object-list stories-list">
+  <% @stories.each do |story| %>
+    <%= render partial: "stories/story_list_item", locals: { story: story } %>
+  <% end %>
+  </ul>
+<% end %>
+</section>

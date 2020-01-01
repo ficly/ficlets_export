@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <% if content_for(:title) %>
+      <%= yield :title %>
+      - Ficlets Archive
+    <% else %>
+      The Ficlets Archive
+    <% end %>
+  </title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="distribution" content="global">
+  <meta name="rating" content="general">
+  <meta name="robots" content="ALL">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="ficlets">
+  <header>
+    <h1><%= link_to "Ficlets", root_path %></h1>
+    <nav>
+      <ul>
+        <li><%= link_to "Authors", authors_path %></li>
+        <li><%= link_to "Stories", stories_path %></li>
+        <li><%= link_to "Tags", tags_path %></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
+  <footer>
+    <aside>
+      <%= link_to "Ficlets", root_path %>
+    </aside>
+    <section>
+      <p>All stories are licensed under a Creative Commons Attribution-Share Alike 3.0 License.</p>
+      <nav>
+        <ul>
+          <li><%= link_to "Authors", authors_path %></li>
+          <li><%= link_to "Stories", stories_path %></li>
+          <li><%= link_to "Tags", tags_path %></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+body#ficlets {
+  aside.story-meta {
+    float: right;
+    max-width: 200px;
+    padding: 10px;
+    margin: 10px 0 10px 10px;
+    background: #f6f5f0;
+    font-size: 13px;
+
+    @media (max-width: 400px) {
+      float: none;
+      max-width: 100%;
+      margin-left: 0;
+    }
+
+  }
+
+  div.story-body {
+    font-size: 18px;
+    border-bottom: 1px dotted #b8b8b8;
+  }
+
+  section.prequels-and-sequels {
+    clear: both;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #b8b8b8;
+    nav.prequels, nav.sequels {
+      flex: 0 0 50%;
+    }
+  }
+
+}

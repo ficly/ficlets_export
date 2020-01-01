@@ -1,0 +1,13 @@
+<% content_for :title do %>
+Authors
+<% end %>
+
+<h1>Authors</h1>
+
+<ol class="object-list authors-list">
+<% @authors.each do |author| %>
+  <%= render partial: "author_list_item", locals: { author: author } %>
+<% end %>
+</ol>
+
+<%= will_paginate @authors %>

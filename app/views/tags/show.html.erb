@@ -1,0 +1,15 @@
+<% content_for :title do %>
+  Tag: <%= @tag.tag %>
+<% end %>
+
+<h1>Tag: <%= @tag.tag %></h1>
+
+<h2>Stories Tagged With: <%= @tag.tag %></h2>
+
+<ol class="object-list stories-list">
+<% @stories.each do |story| %>
+  <%= render partial: "/stories/story_list_item", locals: { story: story } %>
+<% end %>
+</ol>
+
+<%= will_paginate @stories %>

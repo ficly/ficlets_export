@@ -1,0 +1,25 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+body#ficlets {
+  ul.object-list.tags-list, ol.object-list.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+
+    li {
+      flex: 0 1 auto;
+      margin: 5px;
+      padding: 10px;
+      background: #f6f5f0;
+
+      span.tag {
+        margin: 0 3px 0 0;
+        padding: 0;
+        font-weight: bold;
+      }
+    }
+  }
+}

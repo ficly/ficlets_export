@@ -1,0 +1,9 @@
+<li class="story-list-item">
+  <div class="item-meta">
+    <h3><%= link_to story.title, story_path(story.orig_id) %></h3>
+    <% if story.author %>
+    <p><strong>Author: </strong> <%= link_to story.author.name.html_safe, author_path(story.author.uri_name) %></p>
+    <% end %>
+    <p>Published <abbr title="<%= story.published_at.to_s %>"><%= story.display_published_at %></abbr></p>
+  </div>
+</li>

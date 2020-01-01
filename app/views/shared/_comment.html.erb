@@ -1,0 +1,11 @@
+<li id="comment-<%= comment.id %>" class="hreview">
+  <h3 class="reviewer vcard">
+    <%= link_to h( comment.author.name ), author_path( comment.author.uri_name ), :class => "fn" %>
+  </h3>
+  <blockquote class="description">
+    <%= textilize( comment.body ).html_safe %>
+  </blockquote>
+  <ul class="meta clear">
+    <li class="posted">Posted <abbr class="dtreviewed" title="<%= comment.created_at.to_s %>"><a href="#comment-<%= comment.id %>" rel="self bookmark" title="Link to this comment"><%= comment.created_at.to_formatted_s(:db) %></a></abbr>.</li>
+  </ul>
+</li>

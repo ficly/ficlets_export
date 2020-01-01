@@ -1,0 +1,8 @@
+#!/bin/sh
+USER=ficlets_archive
+HOST=ficlets.com
+DIR=ficlets.com/   # might sometimes be empty!
+
+rsync -avz --delete tmp/export/ ${USER}@${HOST}:~/${DIR}
+
+exit 0

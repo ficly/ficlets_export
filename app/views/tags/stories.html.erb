@@ -1,0 +1,13 @@
+<% content_for :title do %>
+  Stories Tagged With: "<%= @tag.tag %>" <% if @page > 1 %>- Page <%= @page %> of <%= @total_pages %> <% end %>
+<% end %>
+
+<h1>Stories Tagged With: "<%= @tag.tag %>"</h1>
+
+<ol class="object-list stories-list">
+<% @stories.each do |story| %>
+  <%= render partial: "/stories/story_list_item", locals: { story: story } %>
+<% end %>
+</ol>
+
+<%= will_paginate @stories %>
