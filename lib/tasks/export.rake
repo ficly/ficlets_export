@@ -86,7 +86,7 @@ namespace :export do
   task :authors => :environment do
     api.get("/authors")
 
-    total_pages = Author.where.not(name: ["", nil]).order("name asc").paginate(page: @page, per_page: 100).total_pages
+    total_pages = Author.paginate(page: @page, per_page: 100).total_pages
 
     i = 1
 
@@ -95,7 +95,7 @@ namespace :export do
       i += 1
     end
 
-    Author.active.where.not(name: ["", nil]).find_each do |user|
+    Author.find_each do |user|
       api.get("/authors/#{user.uri_name}")
     end
   end
@@ -112,7 +112,7 @@ namespace :export do
       i += 1
     end
 
-    Tag.where.not(cleaned_tag: [nil, "", '-', 'page']).where("story_count > 0").find_each do |tag|
+    Tag.where("story_count > 0").find_each do |tag|
       api.get("/tags/#{tag.tag}/stories")
 
       story_ids = tag.story_ids

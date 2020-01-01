@@ -9,7 +9,7 @@
 tags = []
 if @story.tags.any?
   @story.tags.each do |tag|
-    tags << link_to(tag, tag_path(tag)).html_safe
+    tags << link_to(tag, tag_path(tag), rel: "tag").html_safe
   end
 end
 %>
@@ -22,7 +22,7 @@ end
   <aside class="story-meta">
     <p class="published">Published on <abbr class="date" title="<%= @story.published_at.to_s %>"><%= @story.display_published_at %></abbr></p>
     <% if @story.tags.any? %>
-    <p>This story is tagged with: <%= raw tags.join(", ") %></p>
+    <p class="tags">This story is tagged with: <%= raw tags.join(", ") %></p>
     <% end %>
   </aside>
   <div class="story-body">
