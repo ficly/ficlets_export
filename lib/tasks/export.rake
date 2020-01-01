@@ -22,6 +22,13 @@ namespace :export do
   end
 
   task :all do
+
+    f = File.open("tmp/export/.htaccess", "w+")
+    f.puts %(RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://ficly.com/$1 [R,L])
+    f.close
+
     [:assets, :authors, :stories, :tags].each do |t|
       start_time = Time.now
       puts "Starting: #{t}"
