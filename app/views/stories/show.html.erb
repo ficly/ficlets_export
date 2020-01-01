@@ -9,6 +9,7 @@
 tags = []
 if @story.tags.any?
   @story.tags.each do |tag|
+    next if tag.blank?
     tags << link_to(tag, tag_path(tag), rel: "tag").html_safe
   end
 end

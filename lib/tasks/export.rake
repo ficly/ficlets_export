@@ -54,7 +54,7 @@ namespace :export do
       i += 1
     end
 
-    Story.published.find_each do |s|
+    Story.find_each do |s|
       api.get("/stories/#{s.orig_id}")
       api.get("/stories/#{s.orig_id}/comments")
     end

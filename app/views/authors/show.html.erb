@@ -5,7 +5,7 @@
 <h1><%= @author.name.html_safe %></h1>
 
 <div class="author-meta">
-  <div class="bio"><%= @author.bio.html_safe %></div>
+  <% if !@author.bio.blank? %><div class="bio"><%= @author.bio.html_safe %></div><% end %>
 </div>
 
 <section id="stories">
