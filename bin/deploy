@@ -1,6 +1,6 @@
 #!/bin/sh
 USER=ficlets_archive
-HOST=ficlets.com
+HOST=chandelier.dreamhost.com
 DIR=ficlets.com/   # might sometimes be empty!
 
 rsync -avz --delete tmp/export/ ${USER}@${HOST}:~/${DIR}

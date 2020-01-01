@@ -33,6 +33,12 @@ class Story < ActiveRecord::Base
     story.update(o)
   end
 
+  def self.clean_tags
+    self.find_each do |s|
+      s.clean_tags
+    end
+  end
+
   def author
     @author ||= Author.where(uri_name: self.author_short).first
   end
@@ -54,6 +60,16 @@ class Story < ActiveRecord::Base
       t.strip
     end
     @tags
+  end
+
+  def clean_tags
+    new_tags = []
+    self.tags.each do |tag|
+      new_tags << Tag.clean_tag(tag)
+    end
+    new_tags.sort!
+    self.cached_tags = new_tags.join(",")
+    self.save if self.changed?
   end
 
   # For getting the middleman JSON stuff (also a good test of associations):

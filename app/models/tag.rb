@@ -23,10 +23,6 @@ class Tag < ApplicationRecord
 
   def self.generate_tags
     Story.find_each do |story|
-      story.tags.map! do |tag|
-        Tag.clean_tag(tag)
-      end
-      story.save if story.changed?
       story.tags.each do |tag|
         tag = Tag.clean_tag(tag)
         t = Tag.find_or_initialize_by(tag: tag)
