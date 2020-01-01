@@ -18,7 +18,12 @@ It took too long, but it works.
 Everything is in db/export.  To import the authors, stories and comments, you can run:
 
 * Create the local database: `rake db:create`
+* You need to untar (`cd db/export && tar zxvf *.tar.gz`) all the backup files. Commiting over 100k small json files into git just felt rude.
 * Import everything: `rake export:import` -- It will probably take a *while* to import everything.
+* Import the tags...  
+  * run `rails c`
+  * then `Story.clean_tags`, which will clean all the tags in the stories.
+  * then `Tag.generate_tags`, which will pull all the tags from the stories and create Tag records for them. Both of those will take a while.
 
 ### Setting up Rails
 
